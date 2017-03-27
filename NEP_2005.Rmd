@@ -3,7 +3,7 @@ title: "NEP 2005"
 author: "mcdevitt"
 date: "26 mars 2017"
 output:
-  md_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -29,12 +29,12 @@ names(df_nep) <- tolower(names(df_nep))
 
 ```
 
-### Homework 10 - Problem Set
+### Homework 10 - NEP 2005 Evaluation
 
 #### b. Analyze the data providing at least the following:    
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-i. A Scatterplot with confidence intervals of the regression line and prediction intervals of the regression line.  Please do in SAS and R!    
+### __ i. A Scatterplot with confidence intervals of the regression line and prediction intervals of the regression line.  Please do in SAS and R! __      
 ```{r, echo = FALSE}
 
 
@@ -62,11 +62,9 @@ lines(df_nep_pred_int$upr ~ df_nep$distance, col = 'grey', lwd = 1, lty = 2)
 
 And the SAS plot ...
 
-![overestimate vs. Stone distance from SAS PROC REG]()
-
-  
+![Overestimate vs. Poll Distance from SAS PROC REG](SAS_scatter_intervals.png)
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-ii. A table showing the t-statistics and pvalues for the significance of the regression parameters: .   Please do in SAS and R!  
+### __ii. A table showing the t-statistics and pvalues for the significance of the regression parameters: .   Please do in SAS and R!__  
 
 ```{r plot, echo=FALSE}
 
@@ -76,14 +74,13 @@ summary(fit_all)
 
 And the SAS table ...
 
-![overestimate vs. Stone distance from SAS PROC REG]()
-
+![Overestimate vs. Poll Distance from SAS PROC REG](SAS_t_p_values.png)
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-iii. Using the data in ii show all 6 steps of each hypothesis test.   
+### __iii. Using the data in ii show all 6 steps of each hypothesis test.__  
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
 
-##### __Six-Step Hypothesis Test - Slope__   
+#### __Six-Step Hypothesis Test - Slope__   
 
 ``` {r, echo = FALSE}
 
@@ -118,10 +115,10 @@ print_cnf_intrvl <- paste0(sprintf("(%9.3f", cnf_intrvl_lwr), sprintf(", %9.3f)"
 3 : t = `r t_value `    
 4 : p_value = `r p_value` < 0.05 ?    
 5: `r acc_rej`  
-6 : There `r is_is_not` sufficient evidence to suggest at the alpha = `r alpha` level of significance (p-value = `r p_value`) that the slope of the regression line that estimates the T cell for NEP 2005 based on the distance of the birds `r is_is_not` equal to zero. A `r (1 - alpha)*100`% confidence interval for the slope is `r print_cnf_intrvl`, which is an interval that `r does_does_not` contain the value zero  
+6 : There `r is_is_not` sufficient evidence to suggest at the alpha = `r alpha` level of significance (p-value = `r p_value`) that the slope of the regression line that estimates the OverEstimate for NEP 2005 based on the Polling Distance `r is_is_not` equal to zero. A `r (1 - alpha)*100`% confidence interval for the slope is `r print_cnf_intrvl`, which is an interval that `r does_does_not` contain the value zero  
   
 
-##### __Six-Step Hypothesis Test - Intercept__   
+#### __Six-Step Hypothesis Test - Intercept__   
 
 ``` {r, echo = FALSE}
 
@@ -156,12 +153,12 @@ print_cnf_intrvl <- paste0(sprintf("(%9.3f", cnf_intrvl_lwr), sprintf(", %9.3f)"
 3 : t = `r t_value `    
 4 : p_value = `r p_value` < 0.05 ?    
 5: `r acc_rej`  
-6 : There `r is_is_not` sufficient evidence to suggest at the alpha = `r alpha` level of significance (p-value = `r p_value`) that the intercept of the regression line that estimates the T cell for NEP 2005 based on the distance of the birds is not equal to zero. A `r (1 - alpha)*100`% confidence interval for the slope is `r print_cnf_intrvl`, which is an interval that `r does_does_not` contain the value zero  
+6 : There `r is_is_not` sufficient evidence to suggest at the alpha = `r alpha` level of significance (p-value = `r p_value`) that the intercept of the regression line that estimates the OverEstimate for NEP 2005 based on the Polling Distance is not equal to zero. A `r (1 - alpha)*100`% confidence interval for the slope is `r print_cnf_intrvl`, which is an interval that `r does_does_not` contain the value zero  
   
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-iv. The regression equation.  
+### __iv. The regression equation.__  
 
 
 ``` {r, echo = FALSE}
@@ -176,18 +173,18 @@ The Regression equation :
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-v. Interpretation of the slope and intercept in the model (regression equation.)   
+### __v. Interpretation of the slope and intercept in the model (regression equation.)__   
 
-##### The slope represents the rate of change in overestimate estimated for a unit change in stone distance transported by this populations of birds sampled. I.e., for each increase in 1 gram of stone distance there is a corresponding increase in overestimate count of `r b1` 
+##### The slope represents the rate of change in overestimate estimated for a unit change in poll distance . I.e., for each increase in 1 foot of poll distance there is a corresponding increase in overestimate by `r b1` percentage points
 
-##### The intercept represents the estimated average level of overestimate counts associated to a transported stone distance of 0 grams by this population of birds. From a practical point of view, since each bird evalauted did actually transport stones of some distance, the intercept provides an estimate of the lower bound of overestimate counts in this population of birds.
+##### The intercept represents the estimated average level of overestimate percentage pointss associated to a polling distance of 0 feet from this sample study. From a practical point of view, since there were some polling distance experience of 0 feet, the intercept provides an estimate of the mean overestimate percentage expected for the population represented from this sample study.
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-vi. Find and interpret the 95% confidence interval for the mean t-cell response conditional on a stone distance of 4.5 grams.  Please do in SAS and R!  
+### __vi. Find and interpret the 95% confidence interval for the mean overestimate response conditional on a poll distance of 37 feet.  Please do in SAS and R!__  
 
 ``` {r, echo = FALSE} 
 
-cnf_intrvl <- predict(fit_all, data.frame(distance = 4.5) , interval = "confidence")
+cnf_intrvl <- predict(fit_all, data.frame(distance = 37) , interval = "confidence")
 cnf_intrvl_lwr <- cnf_intrvl[1,2]
 cnf_intrvl_upr <- cnf_intrvl[1,3]
 
@@ -195,22 +192,18 @@ print_cnf_intrvl <- paste0(sprintf("(%9.3f", cnf_intrvl_lwr), sprintf(", %9.3f)"
 
 ```
 
-And the SAS table ...
 
-![overestimate vs. Stone distance from SAS PROC REG]()
+The confidence interval is the upper and lower bound for the expected mean value at the given indpendent value (e.g., distance = 37 feet) for the current regression relationship.
 
-
-The confidence interval is the upper and lower bound for the expected mean value at the given indpendent value (e.g., distance = 4.5 grams) for the current regression relationship.
-
-For this particular regression, the confidence interval at stone distance = 4.5 : overestimate count in the range `r print_cnf_intrvl`
+For this particular regression, the confidence interval at poll distance = 37 : overestimate percentage points in the range `r print_cnf_intrvl`
   
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-vii. Find and interpret the 95% prediction interval for the predicted t-cell response given a stone distance of 4.5 grams.   Please do in SAS and R!  
+### __vii. Find and interpret the 95% prediction interval for the predicted overestimate response given a poll distance of 37 feet.   Please do in SAS and R!__  
 
 
 ``` {r, echo = FALSE} 
 
-prd_intrvl <- predict(fit_all, data.frame(distance = 4.5) , interval = "predict")
+prd_intrvl <- predict(fit_all, data.frame(distance = 37) , interval = "predict")
 prd_intrvl_lwr <- prd_intrvl[1,2]
 prd_intrvl_upr <- prd_intrvl[1,3]
 
@@ -221,28 +214,32 @@ print_prd_intrvl <- paste0(sprintf("(%9.3f", prd_intrvl_lwr), sprintf(", %9.3f)"
 
 The prediction interval is the upper and lower bound for an 'next' observation of dependent value at the given independent value, based on the current regression relationshhip. That is to say, for an observation of distance and overestimate not included in this analysis, the prediction interval bounds the range of future observations that are expected.  
 
-For this particular case, the prediction interval at stone distance = 4.5 : overestimate count in the range `r print_prd_intrvl`
+For this particular case, the prediction interval at poll distance = 37 : overestimate percentage points in the range `r print_prd_intrvl`
 
 
+And the SAS table ...
+![Overestimate vs. Poll Distance from SAS PROC REG](SAS_std_residuals.png)
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-viii. Using the graphical method, find and interpret the calibration intervals for the t-cell response of 0.3. (Both for mean t-cell response and for a single t-cell response.   Please do in SAS and R!  (R: package investr)  
+### __viii. Using the graphical method, find and interpret the calibration intervals for the overestimate response of 6.0 feet. (Both for mean overestimate response and for a single overestimate response.   Please do in SAS and R!  (R: package investr)__  
 
 ``` {r, echo = FALSE}
 
 # ... create data frame with equal interval x-axis values
 
-df_distance <- as.data.frame(seq(from = -4, to = 20, by = 0.1))
+y_est <- 6.0
+
+df_distance <- as.data.frame(seq(from = -30, to = 200, by = 5))
 names(df_distance) <- "distance"
 
 plot(df_nep$overestimate ~ df_nep$distance,
 	 col = 'blue',
 	 pch = 1,
-	 xlim = c(-2, 14),
-	 ylim = c(0.0, 0.6)
+	 xlim = c(-30, 50),
+	 ylim = c(0, 10)
 	 )
 
-abline(v = seq(-2, 14, 0.2), col = "gray", lty = 3)
+abline(v = seq(-30, 100, 5), col = "gray", lty = 3)
 
 polygon(c(df_nep$distance, rev(df_nep$distance)),
 		c(df_nep_conf_int$lwr, rev(df_nep_conf_int$upr)),col="lightgrey")
@@ -252,14 +249,14 @@ lines(fit_all$fitted.values ~ df_nep$distance, col = 'black', lwd = 4, lty = 3)
 lines(df_nep_conf_int$lwr ~ df_nep$distance, col = 'black', lwd = 1)
 lines(df_nep_conf_int$upr ~ df_nep$distance, col = 'black', lwd = 1)
 
-points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1, ylim = c(0, 0.6))
+points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1)
 
 df_nep_pred_int <- as.data.frame(predict(fit_all, df_distance, interval = "predict"))
 
 lines(df_nep_pred_int$lwr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 lines(df_nep_pred_int$upr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 
-abline(h = 0.3, col = "red")
+abline(h = y_est, col = "red")
 
 
 # ... zoom in on upper pred interval
@@ -267,11 +264,11 @@ abline(h = 0.3, col = "red")
 plot(df_nep$overestimate ~ df_nep$distance,
 	 col = 'blue',
 	 pch = 1,
-	 xlim = c(-2, 0),
-	 ylim = c(0.25, 0.35)
+	 xlim = c(-30, -20),
+	 ylim = c(y_est-1, y_est+1)
 	 )
 
-abline(v = seq(-2, 14, 0.2), col = "gray", lty = 3)
+abline(v = seq(-30, 200, 5), col = "gray", lty = 3)
 
 polygon(c(df_nep$distance, rev(df_nep$distance)),
 		c(df_nep_conf_int$lwr, rev(df_nep_conf_int$upr)),col="lightgrey")
@@ -281,25 +278,25 @@ lines(fit_all$fitted.values ~ df_nep$distance, col = 'black', lwd = 4, lty = 3)
 lines(df_nep_conf_int$lwr ~ df_nep$distance, col = 'black', lwd = 1)
 lines(df_nep_conf_int$upr ~ df_nep$distance, col = 'black', lwd = 1)
 
-points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1, ylim = c(0, 0.6))
+points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1)
 
 df_nep_pred_int <- as.data.frame(predict(fit_all, df_distance, interval = "predict"))
 
 lines(df_nep_pred_int$lwr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 lines(df_nep_pred_int$upr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 
-abline(h = 0.3, col = "red")
+abline(h = y_est, col = "red")
 
 # ... zoom in on lower pred interval
 
 plot(df_nep$overestimate ~ df_nep$distance,
 	 col = 'blue',
 	 pch = 1,
-	 xlim = c(10, 14),
-	 ylim = c(0.25, 0.35)
+	 xlim = c(30, 50),
+	 ylim = c(y_est-1, y_est+1)
 	 )
 
-abline(v = seq(-2, 14, 0.2), col = "gray", lty = 3)
+abline(v = seq(-30, 200, 5), col = "gray", lty = 3)
 
 polygon(c(df_nep$distance, rev(df_nep$distance)),
 		c(df_nep_conf_int$lwr, rev(df_nep_conf_int$upr)),col="lightgrey")
@@ -309,25 +306,25 @@ lines(fit_all$fitted.values ~ df_nep$distance, col = 'black', lwd = 4, lty = 3)
 lines(df_nep_conf_int$lwr ~ df_nep$distance, col = 'black', lwd = 1)
 lines(df_nep_conf_int$upr ~ df_nep$distance, col = 'black', lwd = 1)
 
-points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1, ylim = c(0, 0.6))
+points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1)
 
 df_nep_pred_int <- as.data.frame(predict(fit_all, df_distance, interval = "predict"))
 
 lines(df_nep_pred_int$lwr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 lines(df_nep_pred_int$upr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 
-abline(h = 0.3, col = "red")
+abline(h = y_est, col = "red")
 
 # ... zoom in on confidence interval
 
 plot(df_nep$overestimate ~ df_nep$distance,
 	 col = 'blue',
 	 pch = 1,
-	 xlim = c(2, 8),
-	 ylim = c(0.25, 0.35)
+	 xlim = c(-10, 30),
+	 ylim = c(y_est-1, y_est+1)
 	 )
 
-abline(v = seq(-2, 14, 0.2), col = "gray", lty = 3)
+abline(v = seq(-20, 200, 5), col = "gray", lty = 3)
 
 polygon(c(df_nep$distance, rev(df_nep$distance)),
 		c(df_nep_conf_int$lwr, rev(df_nep_conf_int$upr)),col="lightgrey")
@@ -337,23 +334,23 @@ lines(fit_all$fitted.values ~ df_nep$distance, col = 'black', lwd = 4, lty = 3)
 lines(df_nep_conf_int$lwr ~ df_nep$distance, col = 'black', lwd = 1)
 lines(df_nep_conf_int$upr ~ df_nep$distance, col = 'black', lwd = 1)
 
-points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1, ylim = c(0, 0.6))
+points(df_nep$overestimate ~ df_nep$distance, col = 'blue', pch = 1)
 
 df_nep_pred_int <- as.data.frame(predict(fit_all, df_distance, interval = "predict"))
 
 lines(df_nep_pred_int$lwr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 lines(df_nep_pred_int$upr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2)
 
-abline(h = 0.3, col = "red")
+abline(h = y_est, col = "red")
 ```
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-ix. Find the same calibration intervals analytically using the SE equations given in class and in the book (Version 3 page 194).    
+### __ix. Find the same calibration intervals analytically using the SE equations given in class and in the book (Version 3 page 194).__    
 
 ```{r}
 
-y_est <- 0.3
+y_est <- 6.0
 x_at_y_est <- (y_est - b0) / b1
 
 x_at_y_est
@@ -384,9 +381,8 @@ cal_pi_est_at_y_est_lwr <- x_at_y_est - crit_value * se_pi_at_y_est
 
 
 
-
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-x. A scatterplot of residuals.    Please do in SAS and R!  
+### __x. A scatterplot of residuals.    Please do in SAS and R!__  
 
 ``` {r, echo = FALSE}
 
@@ -396,7 +392,7 @@ plot(df_nep$distance, overestimate_res,
      pch = 19,
 	 col = "blue",
 	 ylab="Residuals",
-	 xlab="Stone distance", 
+	 xlab="Poll distance (feet)", 
      main="NEP 2005 - Residual Plot") 
 abline(0, 0)
 
@@ -404,7 +400,7 @@ abline(0, 0)
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-xi. A histogram of residuals with normal distribution superimposed.  (from SAS).    
+### __xi. A histogram of residuals with normal distribution superimposed.  (from SAS).__    
 
 
 ``` {r, echo = FALSE}
@@ -414,7 +410,7 @@ res_mean <- mean(overestimate_res)
 res_std <- sqrt(var(overestimate_res))
 
 hist(overestimate_res, density=20, breaks = 10, prob = TRUE, 
-     xlab="Stone distance",
+     xlab="Poll distance (feet)",
 #	 ylim=c(0, 10), 
      main="NEP 2005 - Residuals")
 curve(dnorm(x, mean = res_mean, sd = res_std),
@@ -425,7 +421,8 @@ curve(dnorm(x, mean = res_mean, sd = res_std),
 
 ```
 
-And the SAS plots ...
 
-![overestimate vs. Stone distance from SAS PROC REG]()
+![Overestimate vs. Poll Distance from SAS PROC REG](SAS_residuals_histogram.png)
+
+
   
