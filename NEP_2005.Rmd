@@ -29,7 +29,7 @@ names(df_nep) <- tolower(names(df_nep))
 
 ```
 
-### Homework 10 - NEP 2005 Evaluation
+### Homework 10 - NEP 2005 Evaluation - Problem 29, Chapter 7
 
 #### b. Analyze the data providing at least the following:    
 
@@ -221,7 +221,7 @@ And the SAS table ...
 ![Overestimate vs. Poll Distance from SAS PROC REG](SAS_std_residuals.png)
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
-### __viii. Using the graphical method, find and interpret the calibration intervals for the overestimate response of 6.0 feet. (Both for mean overestimate response and for a single overestimate response.   Please do in SAS and R!  (R: package investr)__  
+### __viii. Using the graphical method, find and interpret the calibration intervals for the overestimate response of 6.0 points. (Both for mean overestimate response and for a single overestimate response.   Please do in SAS and R!  (R: package investr)__  
 
 ``` {r, echo = FALSE}
 
@@ -344,6 +344,10 @@ lines(df_nep_pred_int$upr ~ df_distance$distance, col = 'grey', lwd = 1, lty = 2
 abline(h = y_est, col = "red")
 ```
 
+### The calibration estimates based on graphical inspection are as follows :  
+
+* calibration interval for the __mean__ overestimate response of 6.0 points = (-6, 25)  
+* calibration interval for __single point__ overestimate response of 6.0 points = (-25.5, 42.5)  
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
 ### __ix. Find the same calibration intervals analytically using the SE equations given in class and in the book (Version 3 page 194).__    
@@ -379,6 +383,10 @@ cal_pi_est_at_y_est_lwr <- x_at_y_est - crit_value * se_pi_at_y_est
 
 ```
 
+### The calibration estimates are as follows :  
+
+* calibration interval for the __mean__ overestimate response of 6.0 points = (`r cal_est_at_y_est_lwr`, `r cal_est_at_y_est_upr`)  
+* calibration interval for __single point__ overestimate response of 6.0 points = (`r cal_pi_est_at_y_est_lwr`, `r cal_pi_est_at_y_est_upr`)  
 
 
 =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
@@ -423,6 +431,23 @@ curve(dnorm(x, mean = res_mean, sd = res_std),
 
 
 ![Overestimate vs. Poll Distance from SAS PROC REG](SAS_residuals_histogram.png)
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
+
+__### xii. Question from the text : How strong is the evidence that the mean Kerry overestimate increases with increasing distance of interviewer from the door ? __  
+
+__The data set for this evaluation is quite small (6 data points !!) in relation to the size of the electorate - there are more than 100,000 polling places in the USA. Despite the smallness of the data set, the correllation is very strong. The r² for this study is 94% - suggesting that 94% of the variation in response over-estimation that was observed in this sample can be associated to the variation in the distance from the voter to the exit poll interviewer. This is a remarkable degree of association, considering all of the factors that are potentially contributors to a polling error. One other aspect to limit the inferences from this study is that this is an observational study, so no causal inference can be drawn to state the the overestimation error is due to the distance from the interviewer to the voter.__  
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
+
+__### xiii BONUS QUESTION : What is the unit of measurement for distance in this study ? __
+
+__Numerous references in the article refer to distances in feet ... the distances are related to the distances that each region imposed on the number of feet that exit poll interviewers were required to remain from the doors of the polling stations.  
+
+
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-  
+
 
 
   
